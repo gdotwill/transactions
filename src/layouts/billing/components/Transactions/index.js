@@ -39,8 +39,8 @@ function Transactions() {
             <Transaction
               key={transaction._id}
               transaction={transaction}
-              icon="expand_more"
-              color="success"
+              icon={transaction.amount > 0 ? "expand_less" : "expand_more"}
+              color={transaction.amount > 0 ? "success" : "error"}
             />
           ))}
         </MDBox>

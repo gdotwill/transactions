@@ -34,7 +34,8 @@ function Transaction({ color, icon, name, description, value, transaction }) {
           </MDBox>
         </MDBox>
         <MDTypography variant="button" color={color} fontWeight="medium" textGradient>
-          {transaction.amount}
+          <span>{transaction.amount > 0 ? "+" : "-"}</span>
+          {Math.abs(transaction.amount)}
         </MDTypography>
         <MDBox mr={1}>
           <MDButton variant="text" color="error" onClick={() => deleteTransaction(transaction._id)}>
