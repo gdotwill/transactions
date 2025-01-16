@@ -1,22 +1,6 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
+import React, { useContext, useEffect } from "react";
 
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// @mui material components
 import Card from "@mui/material/Card";
-// import Divider from "@mui/material/Divider";
-import Icon from "@mui/material/Icon";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
@@ -26,12 +10,20 @@ import MDTypography from "components/MDTypography";
 // Billing page components
 import Transaction from "layouts/billing/components/Transaction";
 
+import { GlobalContext } from "../../../../context/GlobalState";
+
 function Transactions() {
+  const { transactions, getTransactions } = useContext(GlobalContext);
+
+  useEffect(() => {
+    getTransactions();
+  }, []);
+
   return (
     <Card sx={{ height: "100%" }}>
       <MDBox display="flex" justifyContent="space-between" alignItems="center" pt={3} px={2}>
         <MDTypography variant="h6" fontWeight="medium" textTransform="capitalize">
-          Transaction&apos;s
+          Transactions
         </MDTypography>
       </MDBox>
       <MDBox pt={3} pb={2} px={2}>
@@ -43,20 +35,14 @@ function Transactions() {
           m={0}
           sx={{ listStyle: "none" }}
         >
-          <Transaction
-            color="error"
-            icon="expand_more"
-            name="Netflix"
-            description="27 March 2020, at 12:30 PM"
-            value="- $ 2,500"
-          />
-          <Transaction
-            color="success"
-            icon="expand_less"
-            name="Apple"
-            description="27 March 2020, at 04:30 AM"
-            value="+ $ 2,000"
-          />
+          {transactions.map((transaction) => (
+            <Transaction
+              key={transaction._id}
+              transaction={transaction}
+              icon="expand_more"
+              color="success"
+            />
+          ))}
         </MDBox>
       </MDBox>
     </Card>

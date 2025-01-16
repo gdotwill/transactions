@@ -1,3 +1,5 @@
+import React, { useState, useContext } from "react";
+
 import Grid from "@mui/material/Grid";
 
 import MDBox from "components/MDBox";
@@ -5,14 +7,22 @@ import MDBox from "components/MDBox";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import ComplexStatisticsCard from "examples/Cards/StatisticsCards/ComplexStatisticsCard";
 
-import reportsLineChartData from "layouts/dashboard/data/reportsLineChartData";
-
 import PaymentMethod from "layouts/billing/components/PaymentMethod";
 import Transactions from "layouts/billing/components/Transactions";
 
-function Dashboard() {
-  const { sales, tasks } = reportsLineChartData;
+import { GlobalContext } from "../../context/GlobalState";
 
+function Dashboard() {
+  const { transactions } = useContext(GlobalContext);
+  const amounts = transactions.map((transaction) => transaction.amount);
+
+  const total = amounts.reduce((acc, item) => (acc += item), 0);
+
+  const income = amounts.filter((item) => item > 0).reduce((acc, item) => (acc += item), 0);
+
+  const expense = amounts.filter((item) => item < 0).reduce((acc, item) => (acc += item), 0) * -1;
+
+  console.log("TTTT", transactions);
   return (
     <DashboardLayout>
       <MDBox py={3} mt={5}>
@@ -22,12 +32,11 @@ function Dashboard() {
               <ComplexStatisticsCard
                 color="dark"
                 icon="weekend"
-                title="Bookings"
-                count={281}
+                title="Total Balance"
+                count={total}
                 percentage={{
                   color: "success",
-                  amount: "+55%",
-                  label: "than lask week",
+                  label: "Overall Total Balance",
                 }}
               />
             </MDBox>
@@ -36,12 +45,11 @@ function Dashboard() {
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
                 icon="leaderboard"
-                title="Today's Users"
-                count="2,300"
+                title="Total Income"
+                count={income}
                 percentage={{
                   color: "success",
-                  amount: "+3%",
-                  label: "than last month",
+                  label: "Overall Total Income",
                 }}
               />
             </MDBox>
@@ -51,12 +59,11 @@ function Dashboard() {
               <ComplexStatisticsCard
                 color="success"
                 icon="store"
-                title="Revenue"
-                count="34k"
+                title="Total Expense"
+                count={expense}
                 percentage={{
                   color: "success",
-                  amount: "+1%",
-                  label: "than yesterday",
+                  label: "Overall Total Expense",
                 }}
               />
             </MDBox>
