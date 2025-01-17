@@ -22,7 +22,6 @@ function Dashboard() {
 
   const expense = amounts.filter((item) => item < 0).reduce((acc, item) => (acc += item), 0) * -1;
 
-  console.log("TTTT", transactions);
   return (
     <DashboardLayout>
       <MDBox py={3} mt={5}>
@@ -30,8 +29,7 @@ function Dashboard() {
           <Grid xs={12} md={6} lg={2.5}>
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
-                color="dark"
-                icon="weekend"
+                icon="euro"
                 title="Total Balance"
                 count={total}
                 percentage={{
@@ -44,7 +42,8 @@ function Dashboard() {
           <Grid xs={12} mx={3} md={6} lg={2.5}>
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
-                icon="leaderboard"
+                color="success"
+                icon="addcircle"
                 title="Total Income"
                 count={income}
                 percentage={{
@@ -57,8 +56,8 @@ function Dashboard() {
           <Grid xs={12} md={6} lg={2.5}>
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
-                color="success"
-                icon="store"
+                color="error"
+                icon="remove"
                 title="Total Expense"
                 count={expense}
                 percentage={{

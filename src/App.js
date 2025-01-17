@@ -10,6 +10,8 @@ import Dashboard from "layouts/dashboard";
 
 import { GlobalProvider } from "./context/GlobalState";
 
+import Container from "@mui/material/Container";
+
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
   const { darkMode } = controller;
@@ -18,7 +20,9 @@ export default function App() {
     <GlobalProvider>
       <ThemeProvider theme={darkMode ? themeDark : theme}>
         <CssBaseline />
-        <Dashboard />
+        <Container>
+          <Dashboard />
+        </Container>
       </ThemeProvider>
     </GlobalProvider>
   );
