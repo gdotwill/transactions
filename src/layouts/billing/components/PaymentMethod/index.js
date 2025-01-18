@@ -71,7 +71,6 @@ function PaymentMethod() {
               type="number"
               inputProps={{ minLength: 0, maxLength: 5 }}
               onInput={maxLengthCheck}
-              pattern="[0-9]*"
             />
           </Grid>
         </Grid>

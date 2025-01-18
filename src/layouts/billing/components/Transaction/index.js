@@ -18,25 +18,24 @@ function Transaction({ color, icon, name, description, value, transaction }) {
   return (
     <MDBox key={name} component="li" py={1} pr={2} mb={1}>
       <MDBox display="flex" justifyContent="space-between" alignItems="center">
-        <MDBox display="flex" alignItems="center">
+        <MDBox display="flex" alignItems="center" mb={1}>
           <MDBox mr={2}>
             <MDButton variant="outlined" color={color} iconOnly circular>
               <Icon sx={{ fontWeight: "bold" }}>{icon}</Icon>
             </MDButton>
           </MDBox>
-          <MDBox display="flex" flexDirection="column">
+          <MDBox display="flex" flexDirection="column" width={300}>
             <MDTypography variant="button" fontWeight="medium" gutterBottom>
               {transaction.text}
             </MDTypography>
-            <MDTypography variant="caption" color="text" fontWeight="regular">
-              {description}
-            </MDTypography>
           </MDBox>
         </MDBox>
+
         <MDTypography variant="button" color={color} fontWeight="medium" textGradient>
           <span>{transaction.amount > 0 ? "+" : "-"}</span>
           {Math.abs(transaction.amount)}
         </MDTypography>
+
         <MDBox mr={1}>
           <MDButton variant="text" color="error" onClick={() => deleteTransaction(transaction._id)}>
             <Icon>delete</Icon>&nbsp;delete

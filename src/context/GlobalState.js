@@ -20,8 +20,8 @@ export const GlobalProvider = ({ children }) => {
   // Actions
   async function getTransactions() {
     try {
-      //   const res = await axios.get("https://expenses-backend-chi.vercel.app/api/v1/transactions");
-      const res = await axios.get("http://localhost:3000/api/v1/transactions");
+      const res = await axios.get("https://expenses-backend-chi.vercel.app/api/v1/transactions");
+      // const res = await axios.get("http://localhost:3000/api/v1/transactions");
 
       console.log("res", res);
 
@@ -39,8 +39,8 @@ export const GlobalProvider = ({ children }) => {
 
   async function deleteTransaction(id) {
     try {
-      //   await axios.delete(`https://expenses-backend-chi.vercel.app/api/v1/transactions/${id}`);
-      await axios.delete(`http://localhost:3000/api/v1/transactions/${id}`);
+      await axios.delete(`https://expenses-backend-chi.vercel.app/api/v1/transactions/${id}`);
+      // await axios.delete(`http://localhost:3000/api/v1/transactions/${id}`);
 
       dispatch({
         type: "DELETE_TRANSACTION",
@@ -62,12 +62,16 @@ export const GlobalProvider = ({ children }) => {
     };
 
     try {
-      //   const res = await axios.post("https://expenses-backend-chi.vercel.app/api/v1/transactions", transaction, config);
       const res = await axios.post(
-        "http://localhost:3000/api/v1/transactions",
+        "https://expenses-backend-chi.vercel.app/api/v1/transactions",
         transaction,
         config
       );
+      // const res = await axios.post(
+      //   "http://localhost:3000/api/v1/transactions",
+      //   transaction,
+      //   config
+      // );
 
       dispatch({
         type: "ADD_TRANSACTION",
